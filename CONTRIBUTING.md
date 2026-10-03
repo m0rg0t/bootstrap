@@ -56,3 +56,37 @@ We only accept issues that are bug reports or feature requests. Bugs must be iso
 ## License
 
 By contributing your code, you agree to license your contribution under the terms of the APLv2: https://github.com/twbs/bootstrap/blob/master/LICENSE
+
+## Reproducible maintenance of this Bootstrap 3 fork
+
+Use Node 24 and `npm ci --ignore-scripts`. `npm run check` builds the distribution,
+checks the existing JS style, verifies compiled CSS against the original 3.0.0
+baseline, and runs the original QUnit assertions against source, concatenated,
+and minified JS in Chromium. Install the browser with
+`npx --no-install playwright install chromium`, or set `CHROMIUM_PATH` to an
+installed Chromium executable. JSON assertion results and screenshots are saved
+in `test-results/`; CI uploads them even on failure.
+
+Less 4 replaces Recess using `math: always`, with JavaScript evaluation disabled.
+Clean CSS runs at level 0 with IE8 compatibility. The CSS regression fingerprint
+preserves rule order and repeated-property order; it normalizes declaration
+ordering, equivalent color/zero spelling, whitespace, and eight-decimal numeric
+serialization. Generated CSS formatting and JS minification therefore change,
+but the Bootstrap 3 API and original QUnit cases remain intact. A new regression
+also guards a delayed transition fallback against changes to feature detection;
+the implementation now captures its event name when scheduling the fallback. Build banners
+use the original 2013 copyright year for deterministic output. `npm run
+check:dist` detects uncommitted generated distribution changes.
+
+PhantomJS, automatic BrowserStack calls, and the Grunt Jekyll/remote HTML
+validation integrations are no longer installed or invoked by `npm test`.
+The historical docs and fixtures remain available; publishing the Jekyll docs,
+paid browser services, and legacy IE testing are outside this offline CI job.
+This is not an upgrade to Bootstrap 5 or a claim that Bootstrap 3 is supported.
+
+On 2026-10-03 npm audit reported 13 high development-only dependency findings
+through Grunt/JSHint/watch (braces, lodash, minimatch and dependent packages).
+The current releases still expose those paths; recommended audit downgrades
+are not treated as fixes. Do not feed untrusted templates or glob patterns to
+this legacy build. The original vendored jQuery/QUnit and Bootstrap runtime
+are deliberately retained as the regression baseline, not certified secure.

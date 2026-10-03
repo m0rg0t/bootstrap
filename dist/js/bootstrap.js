@@ -51,9 +51,9 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
   // http://blog.alexmaccaw.com/css-transitions
   $.fn.emulateTransitionEnd = function (duration) {
-    var called = false, $el = this
-    $(this).one($.support.transition.end, function () { called = true })
-    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    var called = false, $el = this, end = $.support.transition.end
+    $(this).one(end, function () { called = true })
+    var callback = function () { if (!called) $($el).trigger(end) }
     setTimeout(callback, duration)
     return this
   }
