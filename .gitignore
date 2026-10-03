@@ -43,3 +43,7 @@ validation-report.json
 .CVS
 .idea
 node_modules
+
+# Local regression artifacts
+test-results/
+*.tgz
