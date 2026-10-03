@@ -72,7 +72,9 @@ Clean CSS runs at level 0 with IE8 compatibility. The CSS regression fingerprint
 preserves rule order and repeated-property order; it normalizes declaration
 ordering, equivalent color/zero spelling, whitespace, and eight-decimal numeric
 serialization. Generated CSS formatting and JS minification therefore change,
-but the Bootstrap 3 API and original QUnit cases remain intact. Build banners
+but the Bootstrap 3 API and original QUnit cases remain intact. A new regression
+also guards a delayed transition fallback against changes to feature detection;
+the implementation now captures its event name when scheduling the fallback. Build banners
 use the original 2013 copyright year for deterministic output. `npm run
 check:dist` detects uncommitted generated distribution changes.
 
