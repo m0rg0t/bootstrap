@@ -24,9 +24,7 @@ module.exports = function(grunt) {
 
     jshint: {
       options: {
-        jshintrc: 'js/.jshintrc',
-        // Preserve the original chained-bracket line breaks (legacy laxbreak style).
-        '-W014': true
+        jshintrc: 'js/.jshintrc'
       },
       gruntfile: {
         src: 'Gruntfile.js'
